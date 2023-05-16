@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+        }
+
+        li {
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .conten1 {
+            width: 312px;
+            height: 300px;
+            background: yellow;
+        }
+        .conten2{
+            width: 312px;
+            height: 300px;
+            background: yellow;
+        }
+        .active {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<ul class="content1">
+    <li class="active">1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul>
+<div class="conten1">
+    111
+</div>
+<div style="height: 20px"></div>
+<ul class="content2">
+    <li class="active">1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul>
+<div class="conten2">
+    111
+</div>
+</body>
+<script>
+    class Tabs {
+        constructor(classNode, classDiv,evente) {
+            this.select = document.querySelector(classNode)
+            this.liNode = this.select.querySelectorAll('li');
+            this.contDiv = document.querySelector(classDiv)
+            this.event = evente
+            this.togClick()
+        }
+        togClick() {
+            for (let val of this.liNode) {
+                val.addEventListener(this.event, (e) => {
+                    for (let vle of this.liNode) {
+                        if(vle.classList.contains('active')){
+                            vle.classList.remove('active')
+                            break
+                        }
+                    }
+                    e.target.classList.add('active')
+                    this.contDiv.innerHTML = e.target.innerHTML;
+                })
+            }
+
+        }
+    }
+    new Tabs('.content1','.conten1','click');
+    new Tabs('.content2','.conten2','mouseover');
+</script>
+</html>
